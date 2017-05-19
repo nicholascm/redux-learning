@@ -1,5 +1,9 @@
 
 var expect = require('expect'); 
+// var Redux = require('redux'); 
+// var createStore = Redux.createStore; 
+var createStore = require('./store.js'); 
+
 // the entire state of your UI an dapplication is represented in an object
 
 // the state is redundant - an action is a minimal representation of the change to the data
@@ -25,6 +29,28 @@ const counter = (state = 0, action) => {
             return state; 
     } 
 }
+
+const store = createStore(counter); 
+
+console.log(store.getState()); 
+
+store.dispatch({type: 'INCREMENT'}); 
+console.log(store.getState()); 
+
+
+const render = () => {
+    console.log('The new state is', store.getState()); 
+}
+
+store.subscribe(render); 
+render(); 
+
+setTimeout(() => {
+    store.dispatch({ type: 'INCREMENT' }); 
+}, 1000)
+
+
+// tests 
 
 expect(
     counter(0, { type: 'INCREMENT' })
