@@ -1,5 +1,6 @@
 
 var expect = require('expect'); 
+var deepFreeze = require('deepFreeze'); 
 // var Redux = require('redux'); 
 // var createStore = Redux.createStore; 
 var createStore = require('./store.js'); 
@@ -37,9 +38,20 @@ console.log(store.getState());
 store.dispatch({type: 'INCREMENT'}); 
 console.log(store.getState()); 
 
+// const Counter = ({
+//     value, 
+//     onIncrement, 
+//     onDecrement
+// }) => (
+//     // /*<div>
+//     //     <h1>{value}</h1>
+//     //     <button onClick={onIncrement}>+</button>
+//     //     <button onClick={onDecrement}>-</button>
+//     // </div>*/
+// );
 
 const render = () => {
-    console.log('The new state is', store.getState()); 
+   console.log(store.getState());
 }
 
 store.subscribe(render); 
@@ -65,3 +77,41 @@ expect(
 ).toEqual(1); 
 
 console.log('Tests Passed'); 
+
+
+//video 9
+
+const addCounter = (list) => {
+    return [...list, 0]; 
+}
+
+const removeCounter = (list, index) => {
+    return [
+        ...list.slice(0, index),
+        ...list.slice(index+1)
+        ]; 
+}
+
+const incrementCounter = () => {
+    return [
+        ...list.slice(0, index), 
+        list[index] + 1, 
+        ...list.slice(index+1) 
+    ]
+}
+
+const testAddCounter = () => {
+    const listBefore = []; 
+    const listAfter = [0]; 
+    expect(addCounter(listBefore)).toEqual(listAfter); 
+}; 
+
+testAddCounter(); 
+console.log('all tests passed'); 
+
+const testRemoveCounter = () => {
+    const listBefore = [0, 10, 20]; 
+    const listAfter = [0, 20]; 
+}
+
+
